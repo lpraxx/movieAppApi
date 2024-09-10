@@ -1,9 +1,12 @@
 const express = require('express');
 const commentController = require('../controllers/comment');
-const { isLoggedIn } = require('../auth');
+const { verify, isLoggedIn } = require('../auth');
 const router = express.Router();
 
-router.post('/addComment', isLoggedIn, commentController.addComment);
-router.get('/getComments/:movieId', commentController.getCommentsByMovieId);
+// Route to add a comment
+router.post('/addComment', verify, isLoggedIn, commentController.addComment);
 
-module.exports = router;  // Ensure this is exporting the router
+// Route to get all comments for a specific movie
+router.get('/getComments/:movieId', verify, commentController.getCommentsByMovieId);
+
+module.exports = router;

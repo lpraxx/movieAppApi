@@ -46,18 +46,16 @@ module.exports.verify = (req, res, next) => {
 }
 
 module.exports.verifyAdmin = (req, res, next) => {
-	console.log("Result from verifyAdmin method");
-	console.log(req.user);
+    if (req.user && req.user.isAdmin) {
+        next();
+    } else {
+        return res.status(403).send({
+            auth: "Failed",
+            message: "Action Forbidden - Admin access required"
+        });
+    }
+};
 
-	if(req.user.isAdmin) {
-		next();
-	} else {
-		return res.status(403).send({
-			auth: "Failed",
-			message: "Action Forbidden"
-		})
-	}
-}
 
 module.exports.errorHandler = (err, req, res, next) => {
 	console.log(err);

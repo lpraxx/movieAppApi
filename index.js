@@ -20,10 +20,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-mongoose.connect('mongodb+srv://alonsolaira:8ubG8Bg8lusXj9pU@b422-cluster.vqahcau.mongodb.net/fitness-API?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://alonsolaira:8ubG8Bg8lusXj9pU@b422-cluster.vqahcau.mongodb.net/movie-App-API?retryWrites=true&w=majority');
 mongoose.connection.once('open', () => console.log('Now connected to MongoDB Atlas.'))
 
-app.use('/user', authRoutes);
+app.use('/users', userRoutes);
 app.use('/movies', movieRoutes);
 app.use('/comments', commentRoutes);
 
